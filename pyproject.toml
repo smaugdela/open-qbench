@@ -6,7 +6,7 @@ readme = "README.md"
 requires-python = "==3.12.*"
 dependencies = [
     "qiskit-aer~=0.17",
-    "qiskit~=1.0",
+    "qiskit~=2.1",
     "qlauncher[dwave]>=2.0.5",
     "dimod>=0.12.20",
 ]

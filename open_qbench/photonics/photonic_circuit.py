@@ -4,8 +4,7 @@ from itertools import chain
 from typing import Any
 
 from qiskit import QuantumCircuit
-from qiskit.circuit import CircuitError
-from qiskit.circuit.quantumregister import Qubit
+from qiskit.circuit import CircuitError, Qubit
 
 from open_qbench.photonics.photonic_gates import (
     BS,
