@@ -22,18 +22,25 @@ class HighLevelBenchmark(BaseBenchmark):
         super().__init__(benchmark_input, analysis, name)
         self.transpiler = transpiler
 
-    def _prepare_input(self):
+    def _prepare_input(self, transpile: bool = True):
+
         if isinstance(self.benchmark_input.program, PhotonicCircuit):
             # TODO: validate circuits for backend
             self.compiled_input = self.benchmark_input.program
+
         elif isinstance(self.benchmark_input.program, QuantumCircuit):
             self.benchmark_input.program.measure_all()
-            self.compiled_input = transpile(
-                self.benchmark_input.program, self.benchmark_input.backend
-            )
-            # TODO: more advanced, customizable transpilation with transpilation barriers
+
+            if transpile:                
+                self.compiled_input = transpile(
+                    self.benchmark_input.program, self.benchmark_input.backend
+                )
+                # TODO: more advanced, customizable transpilation with transpilation barriers
+            else:
+                self.compiled_input = self.benchmark_input.program
         else:
             self.compiled_input = self.benchmark_input.program
+
 
     @abstractmethod
     def run(self) -> BenchmarkResult:
