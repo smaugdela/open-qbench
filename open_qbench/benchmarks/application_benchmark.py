@@ -88,14 +88,14 @@ class ApplicationBenchmark(HighLevelBenchmark):
             return json.dumps(circuit.to_dict())
         raise ValueError(f"Unsupported circuit type {type(circuit)}")
 
-    def run(self) -> BenchmarkResult:
+    def run(self, transpile: bool = True) -> BenchmarkResult:
         """Run the Application Benchmark protocol.
 
         Returns:
             BenchmarkResult: Probability distributions obtained from execution.
 
         """
-        self._prepare_input()
+        self._prepare_input(transpile=transpile)
 
         if isinstance(self.benchmark_input.program, QuantumCircuit) and isinstance(
             self.compiled_input, QuantumCircuit
